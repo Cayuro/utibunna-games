@@ -34,7 +34,7 @@ public class GameRoomController {
     public GameRoomResponse create(@RequestHeader(USER_ID_HEADER) String userId,
                                    @Valid @RequestBody CreateRoomRequest request) {
         GameRoom room = gameRoomService.createRoom(
-                UUID.fromString(userId), request.gameCode(), request.wagerTokens());
+                UUID.fromString(userId), request.gameCode(), request.bunnaTokens());
         return GameRoomResponse.from(room);
     }
 

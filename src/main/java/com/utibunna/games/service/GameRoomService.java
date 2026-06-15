@@ -42,7 +42,7 @@ public class GameRoomService {
     // ---------------------------------------------------------------- lobby / lifecycle (REST)
 
     @Transactional
-    public GameRoom createRoom(UUID hostUserId, String gameCode, Long wagerTokens) {
+    public GameRoom createRoom(UUID hostUserId, String gameCode, Long bunnaTokens) {
         Game game = gameRepository.findByCode(gameCode)
                 .filter(Game::isActive)
                 .orElseThrow(() -> new ResourceNotFoundException("No active game with code: " + gameCode));
@@ -50,7 +50,7 @@ public class GameRoomService {
         GameRoom room = GameRoom.builder()
                 .gameId(game.getId())
                 .hostUserId(hostUserId)
-                .wagerTokens(wagerTokens)
+                .bunnaTokens(bunnaTokens)
                 .status(RoomStatus.WAITING)
                 .build();
         return gameRoomRepository.save(room);

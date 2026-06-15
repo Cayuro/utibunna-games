@@ -7,6 +7,6 @@ import jakarta.validation.constraints.PositiveOrZero;
 /** Body of {@code POST /api/rooms}. */
 public record CreateRoomRequest(
         @NotBlank String gameCode,
-        @NotNull @PositiveOrZero Long wagerTokens
+        @NotNull @PositiveOrZero Long bunnaTokens
 ) {
 }

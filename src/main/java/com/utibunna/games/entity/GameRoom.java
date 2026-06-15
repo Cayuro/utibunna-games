@@ -42,8 +42,8 @@ public class GameRoom {
     @Column(name = "guest_user_id")
     private UUID guestUserId; // null until a guest joins
 
-    @Column(name = "wager_tokens", nullable = false)
-    private Long wagerTokens;
+    @Column(name = "bunna_tokens", nullable = false)
+    private Long bunnaTokens;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)

@@ -71,7 +71,7 @@ Todas requieren la cabecera `X-User-Id: <uuid>` (la inyecta el gateway).
 | Método | Ruta | Descripción |
 |---|---|---|
 | `GET`  | `/api/games` | Lista los juegos activos |
-| `POST` | `/api/rooms` | Crea sala (host). Body: `{ "gameCode": "...", "wagerTokens": 100 }` |
+| `POST` | `/api/rooms` | Crea sala (host). Body: `{ "gameCode": "...", "bunnaTokens": 100 }` |
 | `GET`  | `/api/rooms` | Lista salas en estado `WAITING` |
 | `GET`  | `/api/rooms/{roomId}` | Detalle de una sala |
 | `POST` | `/api/rooms/{roomId}/join` | El invitado se une → **inicia la partida** automáticamente |
@@ -180,7 +180,7 @@ Códigos: `NOT_YOUR_TURN`, `INVALID_MOVE`, `GAME_FINISHED`, `UNKNOWN_GAME`, `NO_
 ## Flujo completo de una partida
 
 1. `GET /api/games` → el lobby muestra los juegos.
-2. Host: `POST /api/rooms {gameCode, wagerTokens}` → fila `game_rooms` en `WAITING`.
+2. Host: `POST /api/rooms {gameCode, bunnaTokens}` → fila `game_rooms` en `WAITING`.
 3. Host: conecta WS (`X-User-Id`) y se suscribe a `/topic/rooms/{id}` y `/user/queue/errors`.
 4. Invitado: `GET /api/rooms` (ve la sala) → `POST /api/rooms/{id}/join`.
 5. **Auto-start**: se crea el estado inicial en Redis (`game:{id}`), la fila pasa a `IN_PROGRESS`
@@ -192,7 +192,7 @@ Códigos: `NOT_YOUR_TURN`, `INVALID_MOVE`, `GAME_FINISHED`, `UNKNOWN_GAME`, `NO_
    PostgreSQL (`winner_user_id`, `FINISHED`, `finished_at`) y borra la clave de Redis.
 8. Broadcast del estado final → ambos clientes muestran el resultado.
 
-> **`wager_tokens`**: este servicio solo **registra** la apuesta y el ganador. La liquidación de
+> **`bunna_tokens`**: este servicio solo **registra** la apuesta y el ganador. La liquidación de
 > tokens pertenece a otro servicio (wallet/economy); aquí no se implementa.
 
 ## Tests

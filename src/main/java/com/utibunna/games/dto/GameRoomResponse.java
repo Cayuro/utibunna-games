@@ -12,7 +12,7 @@ public record GameRoomResponse(
         UUID gameId,
         UUID hostUserId,
         UUID guestUserId,
-        Long wagerTokens,
+        Long bunnaTokens,
         RoomStatus status,
         UUID winnerUserId,
         Instant createdAt,
@@ -21,7 +21,7 @@ public record GameRoomResponse(
 ) {
     public static GameRoomResponse from(GameRoom r) {
         return new GameRoomResponse(
-                r.getId(), r.getGameId(), r.getHostUserId(), r.getGuestUserId(), r.getWagerTokens(),
+                r.getId(), r.getGameId(), r.getHostUserId(), r.getGuestUserId(), r.getBunnaTokens(),
                 r.getStatus(), r.getWinnerUserId(), r.getCreatedAt(), r.getStartedAt(), r.getFinishedAt());
     }
 }
